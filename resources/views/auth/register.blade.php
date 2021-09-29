@@ -1,59 +1,47 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('app')
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+@section('title', 'ユーザー登録')
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+@section('content')
+    <div class="container">
+        <div class="row">
+        <div class="mx-auto col col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+            <h1 class="text-center"><a class="text-dark" href="/">memo</a></h1>
+            <div class="card mt-3">
+            <div class="card-body text-center">
+                <h2 class="h3 card-title text-center mt-2">ユーザー登録</h2>
 
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
+                <div class="card-text">
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="md-form">
+                        <label for="name">ユーザー名</label>
+                        <input class="form-control" type="text" id="name" name="name" required value="{{ old('name') }}">
+                        <small>英数字3〜16文字(登録後の変更はできません)</small>
+                    </div>
+                    <div class="md-form">
+                        <label for="email">メールアドレス</label>
+                        <input class="form-control" type="text" id="email" name="email" required value="{{ old('email') }}" >
+                    </div>
+                    <div class="md-form">
+                        <label for="password">パスワード</label>
+                        <input class="form-control" type="password" id="password" name="password" required>
+                    </div>
+                    <div class="md-form">
+                        <label for="password_confirmation">パスワード(確認)</label>
+                        <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required>
+                    </div>
+                        <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ユーザー登録</button>
+                    </form>
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <div class="mt-0">
+                    <a href="{{ route('login') }}" class="card-text">ログインはこちら</a>
+                </div>
+                
+                </div>
             </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </div>
+        </div>
+    </div>
+@endsection
