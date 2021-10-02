@@ -14,7 +14,8 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
-Route::get('/', [ArticleController::class,'index']);
+Route::get('/', [ArticleController::class,'index'])->name('article.index');
+Route::resource('/articles',ArticleController::class)->except(['index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
