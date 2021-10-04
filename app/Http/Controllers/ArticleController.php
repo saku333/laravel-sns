@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Http\Requests\ArticleRequest;
+use phpDocumentor\Reflection\Types\Resource_;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Article::class, 'article');
+    }
+
     public function index()
     {
         $articles = Article::all()->sortByDesc('created_at');
